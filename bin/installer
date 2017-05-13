@@ -1,0 +1,60 @@
+#!/bin/sh
+set -eux
+
+# Check environment
+
+fail() {
+    echo "$1" 1>&2
+    echo "Usage: $(basename "$0") [install|uninstall] (rest-server|estic|restic-cron)*" 1>&2
+    exit 1
+}
+
+if [ "$#" -lt 1 ] ; then
+    fail "Invalid number of arguments."
+fi
+
+if [ "$(id --user)" -ne 0 ] ; then
+    fail "Impossible to prepare the system without root privileges."
+fi
+
+if [ "$(uname)" != "Linux" ] ; then
+    fail "Impossible to prepare another operating system than Linux."
+fi
+
+# Run installer
+
+case "$1" in
+    install )
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet rest-server ; then
+            curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/rest-server"
+            chmod +x /usr/local/bin/rest-server
+        fi
+
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
+            curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/restic"
+            chmod +x /usr/local/bin/restic
+        fi
+
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic-cron ; then
+            curl --location --output /usr/local/bin/restic-cron "https://github.com/timonier/restic/raw/master/bin/restic-cron"
+            chmod +x /usr/local/bin/restic-cron
+        fi
+    ;;
+
+    uninstall )
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet rest-server ; then
+            rm --force /usr/local/bin/rest-server
+        fi
+
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
+            rm --force /usr/local/bin/restic
+        fi
+
+        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic-cron ; then
+            rm --force /usr/local/bin/restic-cron
+        fi
+    ;;
+
+    * )
+        fail "Argument \"$1\" is invalid."
+esac

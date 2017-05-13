@@ -1,0 +1,44 @@
+#!/bin/sh
+set -eu
+
+# Check environment
+
+fail() {
+    echo "$1" 1>&2
+    echo "Usage: $(basename "$0") [FOLDER]+" 1>&2
+    exit 1
+}
+
+if [ -z "${RESTIC_PASSWORD:-""}" ] ; then
+    fail "Environment variable \"RESTIC_PASSWORD\" must be defined."
+fi
+
+if [ -z "${RESTIC_REPOSITORY:-""}" ] ; then
+    fail "Environment variable \"RESTIC_REPOSITORY\" must be defined."
+fi
+
+if [ "$#" -lt 1 ] ; then
+    fail "Invalid number of arguments."
+fi
+
+# Initialize repository if necessary
+
+restic init --quiet || :
+
+# Run cron
+
+RESTIC_KEEP_LAST="${RESTIC_KEEP_LAST:-7}"
+RESTIC_SCHEDULE="${RESTIC_SCHEDULE:-@daily}"
+
+while [ 1 ] ; do
+    hypnos "${RESTIC_SCHEDULE}" || fail "Invalid expression."
+    printf "\n"
+
+    for FOLDER in "$@" ; do
+        restic backup --one-file-system "${FOLDER}"
+        printf "\n"
+    done
+
+    restic forget --keep-last "${RESTIC_KEEP_LAST}" --prune
+    printf "\n"
+done
