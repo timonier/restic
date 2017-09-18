@@ -20,7 +20,7 @@ sudo chmod +x /usr/local/bin/restic-cron
 Linux users can use the [installer](https://github.com/timonier/restic/blob/master/bin/installer):
 
 ```sh
-curl --location "https://github.com/timonier/restic/raw/master/bin/installer" | sudo sh -s install
+curl --location "https://github.com/timonier/restic/raw/master/bin/installer" | sudo sh -s -- install
 ```
 
 ## Usage

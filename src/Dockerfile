@@ -6,7 +6,7 @@ LABEL \
 ENV \
     RESTIC_VERSION=latest
 
-RUN set -eux \
+RUN set -ex \
 
     # Install packages
 
@@ -17,24 +17,13 @@ RUN set -eux \
            git \
            go \
 
-    # Install dumb-entrypoint
-
-    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/bin/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s install \
-
-    # Install hypnos
-
-    && export $(curl "https://raw.githubusercontent.com/timonier/version-lister/release/generated/hypnos/latest" | xargs) \
-
-    && curl --location "https://github.com/transitorykris/hypnos/releases/download/${HYPNOS_VERSION}/hypnos-linux-amd64.tar.gz" | tar --directory /usr/bin --extract --gzip \
-    && chown root:root /usr/bin/hypnos \
-
-    # Install rest-server
+    # Install restic/rest-server
 
     && git clone "https://github.com/restic/rest-server" /tmp/rest-server \
     && sh -c "cd /tmp/rest-server && go run build.go" \
     && cp /tmp/rest-server/rest-server /usr/bin/rest-server \
 
-    # Install restic
+    # Install restic/restic
 
     && export $(curl "https://raw.githubusercontent.com/timonier/version-lister/release/generated/restic/${RESTIC_VERSION}" | xargs) \
 
@@ -42,6 +31,19 @@ RUN set -eux \
     && bunzip2 /tmp/restic.bz2 \
     && mv /tmp/restic /usr/bin/restic \
     && chmod +x /usr/bin/restic \
+
+    # Install timonier/dumb-entrypoint
+
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/dumb-entrypoint/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/dumb-init/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/gosu/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
+
+    # Install transitorykris/hypnos
+
+    && export $(curl "https://raw.githubusercontent.com/timonier/version-lister/release/generated/hypnos/latest" | xargs) \
+
+    && curl --location "https://github.com/transitorykris/hypnos/releases/download/${HYPNOS_VERSION}/hypnos-linux-amd64.tar.gz" | tar --directory /usr/bin --extract --gzip \
+    && chown root:root /usr/bin/hypnos \
 
     # Clean
 
