@@ -25,7 +25,7 @@ RUN set -ex \
 
     # Install restic/restic
 
-    && export $(curl "https://raw.githubusercontent.com/timonier/version-lister/release/generated/restic/${RESTIC_VERSION}" | xargs) \
+    && export $(curl --location "https://github.com/timonier/version-lister/raw/release/generated/restic/restic/${RESTIC_VERSION}" | xargs) \
 
     && curl --location --output /tmp/restic.bz2 "https://github.com/restic/restic/releases/download/v${RESTIC_VERSION}/restic_${RESTIC_VERSION}_linux_amd64.bz2" \
     && bunzip2 /tmp/restic.bz2 \
@@ -40,7 +40,7 @@ RUN set -ex \
 
     # Install transitorykris/hypnos
 
-    && export $(curl "https://raw.githubusercontent.com/timonier/version-lister/release/generated/hypnos/latest" | xargs) \
+    && export $(curl --location "https://github.com/timonier/version-lister/raw/release/generated/transitorykris/hypnos/latest" | xargs) \
 
     && curl --location "https://github.com/transitorykris/hypnos/releases/download/${HYPNOS_VERSION}/hypnos-linux-amd64.tar.gz" | tar --directory /usr/bin --extract --gzip \
     && chown root:root /usr/bin/hypnos \
