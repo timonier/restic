@@ -4,6 +4,7 @@ LABEL \
     maintainer="Morgan Auchede <morgan.auchede@gmail.com>"
 
 ENV \
+    REST_SERVER_VERSION=latest \
     RESTIC_VERSION=latest
 
 RUN set -ex \
@@ -11,17 +12,21 @@ RUN set -ex \
     # Install packages
 
     && apk add --no-cache --no-progress --virtual BUILD_DEPS \
-           build-base \
            bzip2 \
            curl \
-           git \
-           go \
+
+    && apk add --no-cache --no-progress \
+           apache2-utils \
+           ca-certificates \
 
     # Install restic/rest-server
 
-    && git clone "https://github.com/restic/rest-server" /tmp/rest-server \
-    && sh -c "cd /tmp/rest-server && go run build.go" \
-    && cp /tmp/rest-server/rest-server /usr/bin/rest-server \
+    && export $(curl --location "https://github.com/timonier/version-lister/raw/release/generated/restic/rest-server/${REST_SERVER_VERSION}" | xargs) \
+
+    && curl --location --output /tmp/rest-server.gz "https://github.com/restic/rest-server/releases/download/v${REST_SERVER_VERSION}/rest-server-${REST_SERVER_VERSION}-linux-amd64.gz" \
+    && gunzip /tmp/rest-server \
+    && mv /tmp/rest-server /usr/bin/rest-server \
+    && chmod +x /usr/bin/rest-server \
 
     # Install restic/restic
 
