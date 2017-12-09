@@ -5,7 +5,7 @@ set -ex
 
 fail() {
     echo 1>&2 "$1"
-    echo 1>&2 "Usage: $(basename "$0") [install|uninstall] (rest-server|estic|restic-cron)*"
+    echo 1>&2 "Usage: $(basename "$0") [install|uninstall] (rest-server|restic)*"
     exit 1
 }
 
@@ -34,11 +34,6 @@ case "$1" in
             curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/restic"
             chmod +x /usr/local/bin/restic
         fi
-
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic-cron ; then
-            curl --location --output /usr/local/bin/restic-cron "https://github.com/timonier/restic/raw/master/bin/restic-cron"
-            chmod +x /usr/local/bin/restic-cron
-        fi
     ;;
 
     uninstall )
@@ -48,10 +43,6 @@ case "$1" in
 
         if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
             rm --force /usr/local/bin/restic
-        fi
-
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic-cron ; then
-            rm --force /usr/local/bin/restic-cron
         fi
     ;;
 
