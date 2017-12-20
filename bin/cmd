@@ -20,4 +20,4 @@ docker run \
     --volume "${HOME}:${HOME}" \
     --volume "${PWD}:${PWD}" \
     --workdir "${PWD}" \
-    "${IMAGE:-timonier/restic}:${TAG:-latest}" restic "$@"
+    "${IMAGE:-timonier/restic}:${TAG:-latest}" "$(basename "$0")" "$@"

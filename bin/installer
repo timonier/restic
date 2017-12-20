@@ -26,12 +26,12 @@ fi
 case "$1" in
     install )
         if [ "$#" -eq 1 ] || echo "$*" | grep --quiet rest-server ; then
-            curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/rest-server"
+            curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
             chmod +x /usr/local/bin/rest-server
         fi
 
         if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
-            curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/restic"
+            curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/cmd"
             chmod +x /usr/local/bin/restic
         fi
     ;;

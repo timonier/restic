@@ -4,16 +4,6 @@ Restic backup program
 
 ## Installation
 
-Copy `rest-server` and `bin/restic` into your executable folder (like `/usr/local/bin` or `$HOME/bin`):
-
-```sh
-sudo curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/rest-server"
-sudo chmod +x /usr/local/bin/rest-server
-
-sudo curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/restic"
-sudo chmod +x /usr/local/bin/restic
-```
-
 Linux users can use the [installer](https://github.com/timonier/restic/blob/master/bin/installer):
 
 ```sh
