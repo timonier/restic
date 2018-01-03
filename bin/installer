@@ -5,7 +5,7 @@ set -ex
 
 fail() {
     echo 1>&2 "$1"
-    echo 1>&2 "Usage: $(basename "$0") [install|uninstall] (rest-server|restic)*"
+    echo 1>&2 "Usage: $(basename "$0") [install|uninstall]"
     exit 1
 }
 
@@ -25,25 +25,16 @@ fi
 
 case "$1" in
     install )
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet rest-server ; then
-            curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
-            chmod +x /usr/local/bin/rest-server
-        fi
+        curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
+        chmod +x /usr/local/bin/rest-server
 
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
-            curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/cmd"
-            chmod +x /usr/local/bin/restic
-        fi
+        curl --location --output /usr/local/bin/restic "https://github.com/timonier/restic/raw/master/bin/cmd"
+        chmod +x /usr/local/bin/restic
     ;;
 
     uninstall )
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet rest-server ; then
-            rm --force /usr/local/bin/rest-server
-        fi
-
-        if [ "$#" -eq 1 ] || echo "$*" | grep --quiet restic ; then
-            rm --force /usr/local/bin/restic
-        fi
+        rm --force /usr/local/bin/rest-server
+        rm --force /usr/local/bin/restic
     ;;
 
     * )
