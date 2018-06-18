@@ -4,6 +4,7 @@ LABEL \
     maintainer="Morgan Auchede <morgan.auchede@gmail.com>"
 
 ENV \
+    RCLONE_VERSION=latest \
     REST_SERVER_VERSION=latest \
     RESTIC_VERSION=latest
 
@@ -17,6 +18,14 @@ RUN set -ex \
     && apk add --no-cache --no-progress \
            apache2-utils \
            ca-certificates \
+\
+    # Install ncw/rclone
+\
+    && export $(curl --location "https://github.com/timonier/version-lister/raw/generated/ncw/rclone/${RCLONE_VERSION}" | xargs) \
+    && curl --location --output /tmp/rclone.zip "https://github.com/ncw/rclone/releases/download/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip" \
+    && sh -c 'cd /tmp && unzip /tmp/rclone.zip' \
+    && mv "/tmp/rclone-v${RCLONE_VERSION}-linux-amd64/rclone" /usr/bin/rclone \
+    && chmod +x /usr/bin/rclone \
 \
     # Install restic/rest-server
 \

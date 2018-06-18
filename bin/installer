@@ -25,6 +25,9 @@ fi
 
 case "$1" in
     install )
+        curl --location --output /usr/local/bin/rclone "https://github.com/timonier/restic/raw/master/bin/cmd"
+        chmod +x /usr/local/bin/rclone
+
         curl --location --output /usr/local/bin/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
         chmod +x /usr/local/bin/rest-server
 
@@ -33,6 +36,7 @@ case "$1" in
     ;;
 
     uninstall )
+        rm --force /usr/local/bin/rclone
         rm --force /usr/local/bin/rest-server
         rm --force /usr/local/bin/restic
     ;;

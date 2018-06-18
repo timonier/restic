@@ -12,6 +12,47 @@ curl --location "https://github.com/timonier/restic/raw/master/bin/installer" | 
 
 ## Usage
 
+### rclone
+
+Run the command `rclone`:
+
+```sh
+rclone config
+# Current remotes:
+#
+# Name                 Type
+# ====                 ====
+# drive                drive
+#
+# e) Edit existing remote
+# n) New remote
+# d) Delete remote
+# r) Rename remote
+# c) Copy remote
+# s) Set configuration password
+# q) Quit config
+# e/n/d/r/c/s/q> r
+# Choose a number from below, or type in an existing value
+#  1 > drive
+# remote> 1
+# Enter new name for "drive" remote.
+# name> new-drive
+# Current remotes:
+#
+# Name                 Type
+# ====                 ====
+# new-drive            drive
+#
+# e) Edit existing remote
+# n) New remote
+# d) Delete remote
+# r) Rename remote
+# c) Copy remote
+# s) Set configuration password
+# q) Quit config
+# e/n/d/r/c/s/q> q
+```
+
 ### rest-server
 
 Run the command `rest-server`:
@@ -98,9 +139,9 @@ __Note__: Use the script `bin/build` to test your modifications locally.
 
 ## Links
 
+* [image "timonier/restic"](https://hub.docker.com/r/timonier/restic/)
+* [ncw/rclone](https://github.com/ncw/rclone)
 * [restic/rest-server](https://github.com/restic/rest-server)
 * [restic/restic](https://github.com/restic/restic)
-* [image "timonier/restic"](https://hub.docker.com/r/timonier/restic/)
 * [timonier/dumb-entrypoint](https://github.com/timonier/dumb-entrypoint)
 * [timonier/version-lister](https://github.com/timonier/version-lister)
-* [transitorykris/hypnos](https://github.com/transitorykris/hypnos)
