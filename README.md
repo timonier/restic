@@ -137,6 +137,8 @@ restic restore 8f22690c --target "${HOME}"
 
 __Note__: Use the script `bin/build` to test your modifications locally.
 
+If you like / use this project, please let me known by adding a [★](https://help.github.com/articles/about-stars/) on the [GitHub repository](https://github.com/timonier/restic).
+
 ## Links
 
 * [image "timonier/restic"](https://hub.docker.com/r/timonier/restic/)
