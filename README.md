@@ -7,8 +7,20 @@ Restic backup program
 Linux users can use the [installer](https://github.com/timonier/restic/blob/master/bin/installer):
 
 ```sh
+# Define installation folder
+
+export INSTALL_DIRECTORY=/usr/bin
+
+# Use local installation
+
+sudo bin/installer install
+
+# Use remote installation
+
 curl --location "https://github.com/timonier/restic/raw/master/bin/installer" | sudo sh -s -- install
 ```
+
+__Note__: If you do not define `INSTALL_DIRECTORY`, `installer` will use in `/usr/local/bin`.
 
 ## Usage
 
@@ -64,7 +76,7 @@ rest-server --help
 
 # Run rest-server
 
-rest-server --path "${HOME}/backup"
+rest-server --path "${HOME}"/backup
 # rest-server 0.9.0 (ed8b484) compiled with go1.7.3 on linux/amd64
 # Data directory: /home/morgan/backup
 # Authentication disabled
@@ -72,8 +84,8 @@ rest-server --path "${HOME}/backup"
 
 # In another terminal, run restic
 
-export RESTIC_PASSWORD="PASSWORD"
-export RESTIC_REPOSITORY="rest:http://127.0.0.1:8000"
+export RESTIC_PASSWORD=my-super-password
+export RESTIC_REPOSITORY=rest:"http://127.0.0.1:8000"
 
 restic init
 # created restic backend 1e491e8100 at rest:http://127.0.0.1:8000
@@ -82,7 +94,7 @@ restic init
 # the repository. Losing your password means that your data is
 # irrecoverably lost.
 
-restic backup --one-file-system "${HOME}/Bureau"
+restic backup --one-file-system "${HOME}"/Bureau
 # scan [/home/morgan/Bureau]
 # scanned 1 directories, 8 files in 0:00
 # [0:00] 100.00%  0B/s  329.613 KiB / 329.613 KiB  9 / 9 items  0 errors  ETA 0:00
@@ -101,8 +113,8 @@ restic --help
 
 # Run restic
 
-export RESTIC_PASSWORD="PASSWORD"
-export RESTIC_REPOSITORY="${HOME}/backup"
+export RESTIC_PASSWORD=PASSWORD
+export RESTIC_REPOSITORY="${HOME}"/backup
 
 restic init
 # created restic backend e56e03fad8 at /home/morgan/backup
@@ -111,7 +123,7 @@ restic init
 # the repository. Losing your password means that your data is
 # irrecoverably lost.
 
-restic backup --one-file-system "${HOME}/Bureau"
+restic backup --one-file-system "${HOME}"/Bureau
 # scan [/home/morgan/Bureau]
 # scanned 1 directories, 8 files in 0:00
 # [0:00] 100.00%  0B/s  329.613 KiB / 329.613 KiB  9 / 9 items  0 errors  ETA 0:00
