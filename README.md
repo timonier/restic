@@ -4,8 +4,6 @@ Restic backup program
 
 ## Installation
 
-Linux users can use the [installer](https://github.com/timonier/restic/blob/master/bin/installer):
-
 ```sh
 # Define installation folder
 
