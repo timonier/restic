@@ -4,14 +4,14 @@ cd "$(dirname "$0")"
 
 # Check environment
 
-fail() {
+_fail() {
     echo 1>&2 "$1"
     echo 1>&2 "Usage: $(basename "$0") [install|uninstall]"
     exit 255
 }
 
 if [ "$#" -lt 1 ]; then
-    fail "Invalid number of arguments."
+    _fail "Invalid number of arguments."
 fi
 
 # Run installer
@@ -23,9 +23,9 @@ case "$1" in
         mkdir -p "${INSTALL_DIRECTORY}"
 
         if [ -t 0 ]; then
-            cp "${PWD}"/cmd "${INSTALL_DIRECTORY}"/rclone
-            cp "${PWD}"/cmd "${INSTALL_DIRECTORY}"/rest-server
-            cp "${PWD}"/cmd "${INSTALL_DIRECTORY}"/restic
+            cp cmd "${INSTALL_DIRECTORY}"/rclone
+            cp cmd "${INSTALL_DIRECTORY}"/rest-server
+            cp cmd "${INSTALL_DIRECTORY}"/restic
         else
             curl --location --output "${INSTALL_DIRECTORY}"/rclone "https://github.com/timonier/restic/raw/master/bin/cmd"
             curl --location --output "${INSTALL_DIRECTORY}"/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
@@ -40,6 +40,6 @@ case "$1" in
         ;;
 
     *)
-        fail "Argument \"$1\" is invalid."
+        _fail "Argument \"$1\" is invalid."
         ;;
 esac
