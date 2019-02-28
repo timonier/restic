@@ -8,7 +8,7 @@ RUN set -e -u -x \
     # Install packages
 \
     && apk add --no-cache --no-progress --virtual BUILD_DEPS bzip2 curl \
-    && apk add --no-cache --no-progress apache2-utils ca-certificates \
+    && apk add --no-cache --no-progress apache2-utils bash ca-certificates \
 \
     # Install dumb-entrypoint
 \
