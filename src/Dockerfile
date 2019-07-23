@@ -12,14 +12,14 @@ RUN set -e -u -x \
 \
     # Install dumb-entrypoint
 \
-    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/dumb-entrypoint/installer" | sh -s -- install \
-    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/gosu/installer" | sh -s -- install \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/dumb-entrypoint/installer" | bash -s -- install \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/gosu/installer" | bash -s -- install \
 \
     # Install rclone
 \
     && export $(curl --location "https://github.com/timonier/version-lister/raw/generated/ncw/rclone/latest" | xargs) \
     && curl --location --output /tmp/rclone.zip "${RCLONE_RELEASE}" \
-    && sh -c "cd /tmp && unzip /tmp/rclone.zip" \
+    && ( cd /tmp && unzip /tmp/rclone.zip ) \
     && mv /tmp/rclone-v"${RCLONE_VERSION}"-linux-amd64/rclone /usr/local/bin/rclone \
     && chmod +x /usr/local/bin/rclone \
 \
