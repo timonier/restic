@@ -27,9 +27,9 @@ case "$1" in
             cp cmd "${INSTALL_DIRECTORY}"/rest-server
             cp cmd "${INSTALL_DIRECTORY}"/restic
         else
-            curl --location --output "${INSTALL_DIRECTORY}"/rclone "https://gitlab.com/timonier/restic/raw/master/bin/cmd"
-            curl --location --output "${INSTALL_DIRECTORY}"/rest-server "https://gitlab.com/timonier/restic/raw/master/bin/cmd"
-            curl --location --output "${INSTALL_DIRECTORY}"/restic "https://gitlab.com/timonier/restic/raw/master/bin/cmd"
+            curl --location --output "${INSTALL_DIRECTORY}"/rclone "https://github.com/timonier/restic/raw/master/bin/cmd"
+            curl --location --output "${INSTALL_DIRECTORY}"/rest-server "https://github.com/timonier/restic/raw/master/bin/cmd"
+            curl --location --output "${INSTALL_DIRECTORY}"/restic "https://github.com/timonier/restic/raw/master/bin/cmd"
         fi
 
         chmod +x "${INSTALL_DIRECTORY}"/rclone "${INSTALL_DIRECTORY}"/rest-server "${INSTALL_DIRECTORY}"/restic

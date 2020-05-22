@@ -2,6 +2,8 @@
 
 Restic backup program
 
+If you like / use this project, please let me known by adding a ★ on the [GitHub repository](https://github.com/timonier/restic).
+
 ## Installation
 
 ```sh
@@ -15,7 +17,7 @@ sudo bin/installer install
 
 # Use remote installation
 
-curl --location "https://gitlab.com/timonier/restic/raw/master/bin/installer" | sudo sh -s -- install
+curl --location "https://github.com/timonier/restic/raw/master/bin/installer" | sudo sh -s -- install
 ```
 
 __Note 1__: If you do not define `INSTALL_DIRECTORY`, `installer` will use in `/usr/local/bin`.
@@ -139,20 +141,6 @@ restic restore 8f22690c --target "${HOME}"
 # restoring <Snapshot 8f22690c of [/home/morgan/Bureau] at 2017-04-28 09:38:37.240551869 +0200 CEST by morgan@dscb004273> to /home/morgan
 ```
 
-## Contributing
-
-1. Fork it.
-2. Create your branch: `git checkout -b my-new-feature`.
-3. Commit your changes: `git commit -am 'Add some feature'`.
-4. Push to the branch: `git push origin my-new-feature`.
-5. Submit a [merge request](https://docs.gitlab.com/ee/user/project/merge_requests/).
-
-__Note 1__: [GitHub repository](https://github.com/timonier/restic) is a mirror. [Merge request](https://docs.gitlab.com/ee/user/project/merge_requests/) has to be submitted to the [GitLab repository](https://gitlab.com/timonier/restic).
-
-__Note 2__: Use the script `bin/build-image` to test your modifications locally.
-
-If you like / use this project, please let me known by adding a [★](https://help.github.com/articles/about-stars/) on the [GitHub repository](https://github.com/timonier/restic) or on the [GitLab repository](https://gitlab.com/timonier/restic).
-
 ## Links
 
 * [image "timonier/restic"](https://hub.docker.com/r/timonier/restic/)
@@ -160,5 +148,4 @@ If you like / use this project, please let me known by adding a [★](https://he
 * [restic/rest-server](https://github.com/restic/rest-server)
 * [restic/restic](https://github.com/restic/restic)
 * [set up docker for mac with native nfs](https://medium.com/@sean.handley/how-to-set-up-docker-for-mac-with-native-nfs-145151458adc)
-* [timonier/dumb-entrypoint](https://gitlab.com/timonier/dumb-entrypoint)
-* [timonier/version-lister](https://gitlab.com/timonier/version-lister)
+* [timonier/restic](https://github.com/timonier/restic)
